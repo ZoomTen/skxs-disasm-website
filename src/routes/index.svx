@@ -22,6 +22,7 @@
 	* [Repository (updated fork)](https://github.com/zoomten/shi-kong-xing-shou)
 	* [Repository (original)](https://github.com/libjet/shi-kong-xing-shou)
 	* [Discord server](https://discord.gg/HQcYgWQ7aY)
+	* [Matrix server](https://matrix.to/#/!JobmqZEWKfNXERAVtt:matrix.org?via=matrix.org)
 	
 </section>
 
