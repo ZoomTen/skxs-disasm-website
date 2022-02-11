@@ -5,9 +5,10 @@
 	import ProgressGraph from "$lib/ProgressGraph/ProgressGraph.svelte"
 
 	import data from "$lib/../update.json"
-
+	let lastTotalDisassembled = data.history[data.history.length-1][1];
+	let totalBytes = data.history[data.history.length-1][2];
 	let percentage =
-		(data.lastTotalDisassembled / data.totalBytes * 100).toFixed(2);
+		(lastTotalDisassembled / totalBytes * 100).toFixed(2);
 
 	let lastData = data.history[data.history.length-1];
 </script>
