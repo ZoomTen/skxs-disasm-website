@@ -35,7 +35,7 @@
 
 	Current progress: **{percentage}%**
 
-	({data.lastTotalDisassembled} out of {data.totalBytes} bytes disassembled)
+	({lastTotalDisassembled} out of {totalBytes} bytes disassembled)
 
 	Symbols:
 	* **Total**: {parseInt(lastData[3]) + parseInt(lastData[4]) + parseInt(lastData[5])}
