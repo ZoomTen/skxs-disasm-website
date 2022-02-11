@@ -3,12 +3,12 @@
 <script>
 	import MainLayout from "$lib/Layout/Main.svelte";
 	import ProgressGraph from "$lib/ProgressGraph/ProgressGraph.svelte"
-	
+
 	import data from "$lib/../update.json"
-	
-	let percentage = 
+
+	let percentage =
 		(data.lastTotalDisassembled / data.totalBytes * 100).toFixed(2);
-	
+
 	let lastData = data.history[data.history.length-1];
 </script>
 <MainLayout>
@@ -23,7 +23,7 @@
 	* [Repository (original)](https://github.com/libjet/shi-kong-xing-shou)
 	* [Discord server](https://discord.gg/HQcYgWQ7aY)
 	* [Matrix server](https://matrix.to/#/!JobmqZEWKfNXERAVtt:matrix.org?via=matrix.org)
-	
+
 </section>
 
 <ProgressGraph source={data}/>
@@ -31,33 +31,33 @@
 <section>
 
 	## Disassembly
-	
+
 	Current progress: **{percentage}%**
-	
+
 	({data.lastTotalDisassembled} out of {data.totalBytes} bytes disassembled)
-	
+
 	Symbols:
-	* Total: {parseInt(lastData[3]) + parseInt(lastData[4]) + parseInt(lastData[5])}
-	* Documented: {parseInt(lastData[3])}
-	* Partially documented: {parseInt(lastData[4])}
-	* Undocumented: {parseInt(lastData[5])}
-	
+	* **Total**: {parseInt(lastData[3]) + parseInt(lastData[4]) + parseInt(lastData[5])}
+	* **Documented**: {parseInt(lastData[3])}
+	* **Partially documented**: {parseInt(lastData[4])}
+	* **Undocumented**: {parseInt(lastData[5])}
+
 </section>
 
 <section>
 
 	## Translation
-	
+
 	This is a supplemental project that is done alongside the disassembly,
 	can be accessed through each repositories' `english` branches.
-	
+
 	In the updated fork, the translation is grabbed from
 	[this spreadsheet](https://docs.google.com/spreadsheets/d/1y9wnxMttF_YDSjfMHfQg1cBUDsa-2EC563a76XyYtFs/edit#gid=1697845225).
-	
+
 	Due to the disassembly not being finished yet, **we don't have a reliable
 	completion percentage**, though we reckon it's about 10% (based on the
 	playthrough doc)
-	
+
 </section>
 
 </div>
@@ -77,21 +77,21 @@
 		position: relative;
 		transform: translateX(-50%);
 	}
-	
+
 	h1 {
 		font-size: 1.2em;
 		text-align: center;
 		line-height: 1.5em;
 	}
-	
+
 	h2 {
 		font-size: 1.2em;
 	}
-	
+
 	.offset {
 		margin: 1.5em 1em;
 	}
-	
+
 	ul {
 		margin-left: 2em;
 		list-style-type: "- "
