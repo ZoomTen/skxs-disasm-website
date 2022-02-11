@@ -27,9 +27,9 @@
 @font-face {
 	font-family: "Star Beast";
 	src:
-		url('star-beast.woff2') format('woff2')
-		url('star-beast.woff') format('woff')
-		url('star-beast.ttf') format('ttf')
+		url('star-beast.woff2') format('woff2'),
+		url('star-beast.woff') format('woff'),
+		url('star-beast.ttf') format('ttf');
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
