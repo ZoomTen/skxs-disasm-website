@@ -4,43 +4,43 @@
 	import * as Pancake from "@sveltejs/pancake";
 	import strftime from "./strftime.js";
 	export let source;
-	
+
 	let data = source.history;
-	
+
 	let total_bytes = parseInt(data[0][2]);
 	let first_commit_date = Date.parse(data[0][0]);
 	let last_commit_date = Date.parse(data[data.length-1][0]);
-	
-	
+
+
 	let max_bytes = (
 		parseInt(data.reduce(
 			(p, c) => p[1] > c[1]? p : c
 		)[1]) + 4000
 	);
-	
+
 	const months = [
 		'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 		'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 	]
-	
+
 	const dec2month = (date) => {
 		const year = ~~date; // floor(date)
 		const month = Math.floor((date % 1) * 12);
-		
+
 		return `${months[month]} ${year}`
 	}
-	
+
 	const dec2date = (date) => {
 		const year = ~~date; // floor(date)
 		const month = Math.floor((date % 1) * 12);
-		
+
 		return `'${(year+'').substring(2)}/${(month+'').padStart(2,'0')}`
 	}
-	
+
 	const pc = (date) => {
 		return 100 * (date - first_commit_date) / (last_commit_date - first_commit_date);
 	};
-	
+
 	/*const format_suffix = (value) => {
 		value = value + "";
 		return value.replace(
@@ -57,11 +57,11 @@
 			}
 		);
 	}*/
-	
+
 	const calc_percentage = (val, max) => {
 		return parseInt(val)/parseInt(max)*100;
 	}
-	
+
 	const format_integers = (val, sep) => {
 		// from @componitable/format-number
 		// Copyright (c) 2017 Forbes Lindesay, BSD 3-clause
@@ -72,7 +72,29 @@
 			val = val.replace(rgx, '$1' + sep + '$2');
 		}
 		return val;
-	}
+	};
+
+    function saveCSV(){
+        // make preamble
+        let content = "iso_date,bytes_disassembled,total_bytes,documented_symbols,partialdoc_symbols,undoc_symbols,commit\n";
+        // write CSV
+        for (let point of data) {
+            content += `${point[0]},${point[1]},${point[2]},${point[3]},${point[4]},${point[5]},${point[6]}\n`
+        }
+        // export CSV
+        let csv = new Blob([content], {type: 'text/csv'});
+
+        const url = URL.createObjectURL(csv);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "skxs_disasm.csv";
+        document.body.appendChild(link);
+        link.dispatchEvent(
+            new MouseEvent("click", {bubbles: true, cancelable: true, view: window})
+        );
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
 </script>
 
 <div id="chart">
@@ -90,7 +112,7 @@
 			<Pancake.SvgLine data={data} x="{d => Date.parse(d[0])}" y="{d => d[1]}" let:d>
 				<path class="data" pathLength=.04 {d}/>
 			</Pancake.SvgLine>
-			
+
 			<Pancake.Quadtree data={data} x="{d => Date.parse(d[0])}" y="{d => d[1]}" let:closest>
 				{#if closest}
 					<Pancake.SvgPoint x={Date.parse(closest[0])} y={closest[1]} let:d>
@@ -119,11 +141,34 @@
 			{/if}
 		</Pancake.Quadtree>
 	</Pancake.Chart>
+    <button on:click={saveCSV}>
+        Save as CSV
+    </button>
 </div>
 
 <style>
+    button {
+        position: absolute;
+        left: 50%;
+        margin-top: 3.5em;
+        transform: translate(-50%, 0);
+        appearance: none;
+        padding: .5em 1em;
+        font-family: inherit;
+        font-size: .75em;
+        border-radius: 8px;
+        border: 1px solid #000;
+        background-color: #06a;
+        color: #fff;
+        box-shadow: 0 -4px 0 inset #3cf;
+        transition: .1s box-shadow, .1s transform;
+    }
+    button:active {
+        transform: translate(-50%, 4px);
+        box-shadow: 0 0 0 inset #3cf;
+    }
 	#chart {
-		height: 25em;
+		height: 30em;
 		max-width: 50em;
 		margin: auto;
 		padding: 0 3em 4em 3em;
@@ -132,8 +177,9 @@
 		border: white 1em solid;
 		border-image: url("/border.png") 33%;
 		background: white;
+        padding-bottom: 7.5em;
 	}
-	
+
 	.grid-line {
 		position: relative;
 		display: block;
@@ -146,7 +192,7 @@
 		animation: .4s width both;
 		animation-delay: .2s;
 	}
-	
+
 	@keyframes width {
 		from { width: 0; }
 		to   { width: calc(100% + 2em); }
@@ -158,7 +204,7 @@
 		animation: .4s height both;
 		animation-delay: .2s;
 	}
-	
+
 	@keyframes height {
 		from { height: 0; }
 		to   { height: 100%; }
@@ -187,13 +233,13 @@
 		text-align: center;
 		font-size: .5em;
 	}
-	
+
 	@media screen and (max-width: 56em) {
 		.year-label {
 			display: none;
 		}
 	}
-	
+
 	path.data {
 		stroke: #000;
 		stroke-linejoin: round;
@@ -213,7 +259,7 @@
 			stroke-dashoffset: 0;
 		}
 	}
-		
+
 
 	path.highlight {
 		stroke: #000;
@@ -222,7 +268,7 @@
 		stroke-width: 9px;
 		fill: none;
 	}
-	
+
 	.tooltip {
 		position: absolute;
 		width: 12em;
