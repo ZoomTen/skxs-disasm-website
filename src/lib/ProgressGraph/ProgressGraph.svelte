@@ -1,6 +1,7 @@
 <!-- this is where the page lives -->
 
 <script>
+	import { onMount } from 'svelte';
 	import * as Pancake from "@sveltejs/pancake";
 	import strftime from "./strftime.js";
 	export let source;
@@ -95,10 +96,16 @@
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     }
+    
+    let csv_btn;
+    onMount(()=>{
+    	console.log("triggered");
+    	csv_btn.style = "";
+    });
 </script>
 
 <div id="chart">
-	<Pancake.Chart x1={first_commit_date} x2={last_commit_date} y1=0 y2={max_bytes}>
+	<Pancake.Chart x1={first_commit_date} x2={last_commit_date} y1=0 y2={max_bytes*1.25}>
 		<Pancake.Grid horizontal count={5} let:value let:first let:last>
 			<div class="grid-line horizontal" class:first><span>{calc_percentage(value, total_bytes).toFixed(1)}{last ? ' %' : ''}</span></div>
 		</Pancake.Grid>
@@ -141,20 +148,31 @@
 			{/if}
 		</Pancake.Quadtree>
 	</Pancake.Chart>
-    <button on:click={saveCSV}>
-        Save as CSV
-    </button>
+	<div class="button-container">
+		<button bind:this={csv_btn} on:click={saveCSV} style="display:none;">
+		    Save as CSV
+		</button>
+		<a class="button" href="https://raw.githubusercontent.com/ZoomTen/skxs-disasm-website/master/src/update.json" target="_blank">
+			Save as JSON
+		</a>
+    </div>
 </div>
 
 <style>
-    button {
+	.button-container {
         position: absolute;
         left: 50%;
-        margin-top: 3.5em;
         transform: translate(-50%, 0);
+        display: flex;
+        margin-top: 3.5em;
+        justify-content: center;
+	}
+	
+    button, .button {
         appearance: none;
         padding: .5em 1em;
         font-family: inherit;
+        margin-right: 1em;
         font-size: .75em;
         border-radius: 8px;
         border: 1px solid #000;
@@ -162,9 +180,10 @@
         color: #fff;
         box-shadow: 0 -4px 0 inset #3cf;
         transition: .1s box-shadow, .1s transform;
+        text-decoration: none;
     }
-    button:active {
-        transform: translate(-50%, 4px);
+    button:active, .button:active {
+        transform: translate(0, 4px);
         box-shadow: 0 0 0 inset #3cf;
     }
 	#chart {
@@ -172,12 +191,12 @@
 		max-width: 50em;
 		margin: auto;
 		padding: 0 3em 4em 3em;
-		font-family: "Star Beast", sans-serif;
+		font-family: "Star Beasts Mono", sans-serif;
 		clip-path: none;
 		border: white 1em solid;
 		border-image: url("/border.png") 33%;
 		background: white;
-        padding-bottom: 7.5em;
+        padding-bottom: 8.5em;
 	}
 
 	.grid-line {
