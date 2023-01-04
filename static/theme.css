@@ -31,7 +31,7 @@ hr {
 /*! main theme */
 
 body {
-	font-family: 'Star Beast', monospace;
+	font-family: 'Star Beasts Mono', monospace;
 	background: #777;
 	line-height: 1.7;
 	background-image: url(bg.png);
@@ -39,7 +39,7 @@ body {
 	background-position: center;
 	background-blend-mode: multiply;
 	background-attachment: fixed;
-	
+	letter-spacing: -.08em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 
 tt, code, kbd, samp {
 	font-size: 1rem;
-	font-family: 'Star Beast', monospace;
+	font-family: 'Star Beasts Mono', monospace;
 	background-color: #ddd;
 	padding: .1rem .6em;
 }
@@ -66,5 +66,5 @@ b, strong, h1, h2, h3, h4, h5, h6 {
 	text-shadow:
 		1px 0 0 #000,
 	   -1px 0 0 #000;
-	letter-spacing: 1px;
+	letter-spacing: 0;
 }
