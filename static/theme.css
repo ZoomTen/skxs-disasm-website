@@ -42,6 +42,12 @@ body {
 	letter-spacing: -.08em;
 }
 
+@media screen and (max-width: 64em) {
+	body {
+		font-size: .7em;
+	}
+}
+
 h1, h2, h3, h4, h5, h6 {
 	margin: .5em 0;
 }
@@ -51,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 tt, code, kbd, samp {
-	font-size: 1rem;
+	font-size: 1em;
 	font-family: 'Star Beasts Mono', monospace;
 	background-color: #ddd;
 	padding: .1rem .6em;
