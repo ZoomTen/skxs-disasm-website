@@ -39,7 +39,6 @@ body {
 	background-position: center;
 	background-blend-mode: multiply;
 	background-attachment: fixed;
-	letter-spacing: -.08em;
 }
 
 @media screen and (max-width: 64em) {

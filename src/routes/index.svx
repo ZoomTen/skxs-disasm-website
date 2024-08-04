@@ -20,14 +20,11 @@
 
 	# Shi Kong Xing Shou Disassembly
 
-	* [Repository (updated fork)](https://github.com/zoomten/shi-kong-xing-shou)
-	* [Repository (original)](https://github.com/libjet/shi-kong-xing-shou)
-	* [Discord server](https://discord.gg/HQcYgWQ7aY)
-	* [Matrix server](https://matrix.to/#/!JobmqZEWKfNXERAVtt:matrix.org?via=matrix.org)
+	* [Updated repository](https://github.com/zoomten/shi-kong-xing-shou)
+	* [Discord](https://discord.gg/HQcYgWQ7aY) / [Matrix](https://matrix.to/#/!JobmqZEWKfNXERAVtt:matrix.org?via=matrix.org)
+	* [Translation patch download](https://github.com/ZoomTen/shi-kong-xing-shou/releases)
 
 </section>
-
-<ProgressGraph source={data}/>
 
 <section>
 
@@ -37,27 +34,31 @@
 
 	({lastTotalDisassembled} out of {totalBytes} bytes disassembled)
 
-	Symbols:
-	* **Total**: {parseInt(lastData[3]) + parseInt(lastData[4]) + parseInt(lastData[5])}
-	* **Documented**: {parseInt(lastData[3])}
-	* **Partially documented**: {parseInt(lastData[4])}
-	* **Undocumented**: {parseInt(lastData[5])}
+	Identified **{parseInt(lastData[3]) + parseInt(lastData[4]) + parseInt(lastData[5])}** symbols:
+	* **{parseInt(lastData[3])}** documented
+	* **{parseInt(lastData[4])}** partially documented
+	* **{parseInt(lastData[5])}** undocumented
 
 </section>
+
+<ProgressGraph source={data}/>
 
 <section>
 
 	## Translation
 
-	This is a supplemental project that is done alongside the disassembly,
-	can be accessed through each repositories' `english` branches.
-
-	In the updated fork, the translation is grabbed from
-	[this spreadsheet](https://docs.google.com/spreadsheets/d/1y9wnxMttF_YDSjfMHfQg1cBUDsa-2EC563a76XyYtFs/edit#gid=1697845225).
+	This is a supplemental project that is done alongside the disassembly.
+	We are currently translating it into multiple languages, primarily **English**.
+	
+	The translation is
+	generated from [this spreadsheet](https://docs.google.com/spreadsheets/d/1y9wnxMttF_YDSjfMHfQg1cBUDsa-2EC563a76XyYtFs/edit#gid=1697845225), and updates
+	are often released just to reflect the latest changes to it.
 
 	Due to the disassembly not being finished yet, **we don't have a reliable
 	completion percentage**, though we reckon it's about 10% (based on the
 	playthrough doc)
+
+	Patches are available through [GitHub Releases](https://github.com/ZoomTen/shi-kong-xing-shou/releases).
 
 </section>
 
